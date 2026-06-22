@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Display Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem;">
+        <div style="flex: 1;">
+            <select id="lang-toggle" class="btn outline-btn" onchange="changeLang(this.value)" style="padding: 0.5rem; width: auto;">
+                <option value="en">English</option>
+                <option value="nl">Nederlands</option>
+            </select>
+        </div>
+        <h1 style="flex: 2; text-align: center; margin: 0;" data-i18n="header_title">Emergency Command Center</h1>
+        <div style="flex: 1; display: flex; justify-content: flex-end; gap: 1rem;">
+            <button class="btn outline-btn" id="theme-toggle" onclick="toggleTheme()" data-i18n="theme_light">☀️ Light Mode</button>
+            <button class="btn outline-btn" onclick="logout()" data-i18n="logout">Logout</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="panel new-message-panel">
+            <h2 data-i18n="create_title">Create New Message</h2>
+            <form id="create-form">
+                <div class="form-group">
+                    <label for="name" data-i18n="preset_name">Preset Name</label>
+                    <input type="text" id="name" name="name" required placeholder="e.g. fire-evacuation">
+                </div>
+                
+                <div class="form-group">
+                    <label for="text" data-i18n="msg_text">Message Text</label>
+                    <textarea id="text" name="text" rows="3" required placeholder="Enter emergency message..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="textColor" data-i18n="txt_color">Text Color</label>
+                    <input type="color" id="textColor" name="textColor" value="#ffffff">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bgColor" data-i18n="bg_color">Background Color</label>
+                    <input type="color" id="bgColor" name="bgColor" value="#ff0000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bgImage" data-i18n="bg_img">Background Image (Optional)</label>
+                    <input type="file" id="bgImage" name="bgImage" accept="image/*">
+                </div>
+                
+                <button type="submit" class="btn btn-primary" data-i18n="btn_create">Create Message</button>
+            </form>
+        </section>
+
+        <section class="panel list-panel">
+            <button class="btn btn-danger fade-btn" onclick="fadeToBlack()">
+                <span data-i18n="fade_to_black">FADE TO BLACK</span><br>
+                <small style="font-weight: 400; opacity: 0.8;" data-i18n="fade_desc">Instantly clear all screens</small>
+            </button>
+            
+            <h2 style="margin-bottom: 1.5rem; padding-bottom: 0.75rem;" data-i18n="config_msgs">Configured Messages</h2>
+            <div id="message-list" class="message-list">
+                <!-- Messages injected here -->
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
